@@ -16,16 +16,20 @@
 const EthereumTx = require('ethereumjs-tx')
 const privateKey = Buffer.from('e331b6d69882b4cb4ea581d88e0b604039a3de5967688d3dcffdd2270c0fd109', 'hex')
 
+function AOAtoHex(address) {
+    return address.replace(/^AOA/, '0x')
+}
+
 const txParams = {
   nonce: '0x00',
   gasPrice: '0x09184e72a000', 
   gasLimit: '0x2710',
-  to: '0x0000000000000000000000000000000000000000', 
+  to: AOAtoHex('AOA0000000000000000000000000000000000000000'), 
   value: '0x00', 
   data: '0x7f7465737432000000000000000000000000000000000000000000000000000000600057',
-  // EIP 155 chainId - mainnet: 1, ropsten: 3
-  chainId: 3
-}
+  action: 0, // 0 for regular/asset transaction, 6 for call contract
+  asset: AOAtoHex('AOA0000000000000000000000000000000000000000'), //asset id, use it when asset transaction
+  subAddress: AOAtoHex('AOA140e0b100bc3c5820a5d5ed3cf94d54491f51a2fb590033560f603659600033565733600')
 
 const tx = new EthereumTx(txParams)
 tx.sign(privateKey)

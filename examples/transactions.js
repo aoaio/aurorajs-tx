@@ -2,6 +2,10 @@
 
 var Transaction = require('../index.js')
 
+function AOAtoHex(address) {
+    return address.replace(/^AOA/, '0x')
+}
+
 // create a blank transaction
 var tx = new Transaction(null, 1) // mainnet Tx EIP155
 
@@ -15,9 +19,9 @@ tx.value = 0
 tx.data = '0x7f4e616d65526567000000000000000000000000000000000000000000000000003057307f4e616d6552656700000000000000000000000000000000000000000000000000573360455760415160566000396000f20036602259604556330e0f600f5933ff33560f601e5960003356576000335700604158600035560f602b590033560f60365960003356573360003557600035335700'
 tx.action = 0
 // tx.chainId = 3
-tx.to = 'AOA140e0b100bc3c5820a5d5ed3cf94d54491f51a2f'.replace('AOA', '0x')
+tx.to = AOAtoHex('AOA140e0b100bc3c5820a5d5ed3cf94d54491f51a2f')
 // tx.asset = 'AOA140e0b100bc3c5820a5d5ed3cf94d54491f51a2f'.replace('AOA', '0x')
-tx.subAddress = 'AOA140e0b100bc3c5820a5d5ed3cf94d54491f51a2fb590033560f603659600033565733600'.replace('AOA', '0x')
+tx.subAddress = AOAtoHex('AOA140e0b100bc3c5820a5d5ed3cf94d54491f51a2fb590033560f603659600033565733600')
 
 var privateKey = new Buffer('e331b6d69882b4cb4ea581d88e0b604039a3de5967688d3dcffdd2270c0fd109', 'hex')
 tx.sign(privateKey, 1)
