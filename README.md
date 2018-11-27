@@ -1,4 +1,4 @@
-# package.json引用方法
+# package.json [usage example]
 
 ```javascript
 "dependencies": {
