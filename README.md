@@ -13,6 +13,7 @@
 ```javascript
 const AuroraTx = require('aurorajs-tx')
 const privateKey = Buffer.from('e331b6d69882b4cb4ea581d88e0b604039a3de5967688d3dcffdd2270c0fd109', 'hex')
+const chainId = 1
 
 function AOAtoHex(address) {
     return address.replace(/^AOA/, '0x')
@@ -30,7 +31,7 @@ const txParams = {
   subAddress: AOAtoHex('AOA140e0b100bc3c5820a5d5ed3cf94d54491f51a2fb590033560f603659600033565733600')
 
 const tx = new AuroraTx(txParams)
-tx.sign(privateKey)
+tx.sign(privateKey, chainId)
 const serializedTx = tx.serialize()
 ```
 
