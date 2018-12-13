@@ -7,21 +7,33 @@ function AOAtoHex(address) {
 }
 
 // create a blank transaction
-var tx = new Transaction(null, 1) // mainnet Tx EIP155
+// var tx = new Transaction(null, 1) // mainnet Tx EIP155
 
 // So now we have created a blank transaction but Its not quiet valid yet. We
 // need to add some things to it. Lets start:
 // notice we don't set the `to` field because we are creating a new contract.
-tx.nonce = 0
-tx.gasPrice = 100
-tx.gasLimit = 1000
-tx.value = 0
-tx.data = '0x7f4e616d65526567000000000000000000000000000000000000000000000000003057307f4e616d6552656700000000000000000000000000000000000000000000000000573360455760415160566000396000f20036602259604556330e0f600f5933ff33560f601e5960003356576000335700604158600035560f602b590033560f60365960003356573360003557600035335700'
-tx.action = 0
+// tx.nonce = 0
+// tx.gasPrice = 100
+// tx.gasLimit = 1000
+// tx.value = 0
+// tx.data = '0x7f4e616d65526567000000000000000000000000000000000000000000000000003057307f4e616d6552656700000000000000000000000000000000000000000000000000573360455760415160566000396000f20036602259604556330e0f600f5933ff33560f601e5960003356576000335700604158600035560f602b590033560f60365960003356573360003557600035335700'
+// tx.action = 0
 
-tx.to = AOAtoHex('AOA140e0b100bc3c5820a5d5ed3cf94d54491f51a2f')
+// tx.to = AOAtoHex('AOA140e0b100bc3c5820a5d5ed3cf94d54491f51a2f')
 // tx.asset = 'AOA140e0b100bc3c5820a5d5ed3cf94d54491f51a2f'.replace('AOA', '0x')
-tx.subAddress = AOAtoHex('AOA140e0b100bc3c5820a5d5ed3cf94d54491f51a2fb590033560f603659600033565733600')
+// tx.subAddress = AOAtoHex('AOA140e0b100bc3c5820a5d5ed3cf94d54491f51a2fb590033560f603659600033565733600')
+const txParams = {
+    nonce: '0x00',
+    gasPrice: '0x09184e72a000', 
+    gasLimit: '0x2710',
+    to: AOAtoHex('AOA2b31c44ccbb50b27b2b283970393f4a3da153a14'), 
+    value: '0x1', 
+    data: '',
+    action: 0, // 0 for regular/asset transaction, 6 for call contract
+  //   asset: AOAtoHex('AOA0000000000000000000000000000000000000000'), //asset id, use it when asset transaction
+    // subAddress: AOAtoHex('AOA2b31c44ccbb50b27b2b283970393f4a3da153a1417177ba750f0d7ea5e7045e37abfc6db')
+  }
+let tx = new Transaction(txParams)
 
 var privateKey = new Buffer('e331b6d69882b4cb4ea581d88e0b604039a3de5967688d3dcffdd2270c0fd109', 'hex')
 tx.sign(privateKey, 1)

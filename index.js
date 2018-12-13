@@ -149,9 +149,6 @@ class Transaction {
       get: this.getSenderAddress.bind(this)
     })
 
-    //covert action to string
-    this.action = ethUtil.bufferToInt(this.action).toString()
-
     // calculate chainId from signature
     let sigV = ethUtil.bufferToInt(this.v)
     let chainId = Math.floor((sigV - 35) / 2)
