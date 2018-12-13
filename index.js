@@ -264,7 +264,7 @@ class Transaction {
     const msgHash = this.hash(false)
     const sig = ethUtil.ecsign(msgHash, privateKey)
     if (chainID > 0) {
-      sig.v += chainID * 2 + 35
+      sig.v += chainID * 2 + 8
     }
     Object.assign(this, sig)
   }
