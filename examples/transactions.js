@@ -35,7 +35,7 @@ const txParams = {
   }
 let tx = new Transaction(txParams)
 
-var privateKey = new Buffer('e331b6d69882b4cb4ea581d88e0b604039a3de5967688d3dcffdd2270c0fd109', 'hex')
+var privateKey = new Buffer('ee78a0de7de34f55fa4f06f1738807a194f68904d5278c2920e73e266580ca54', 'hex')
 tx.sign(privateKey, 60)
 // We have a signed transaction, Now for it to be fully fundable the account that we signed
 // it with needs to have a certain amount of wei in to. To see how much this

@@ -113,7 +113,7 @@ class Transaction {
     }, {
       name: 'v',
       allowZero: true,
-      default: new Buffer([0x1c])
+      default: new Buffer([0x1b])
     }, {
       name: 'r',
       length: 32,
@@ -172,9 +172,9 @@ class Transaction {
    * @param {Boolean} [includeSignature=true] whether or not to inculde the signature
    * @return {Buffer}
    */
-  hash (includeSignature) {
+  hash (includeSignature, chainID) {
     if (includeSignature === undefined) includeSignature = true
-
+    if (includeSignature && chainID) this.v = chainID;
     // EIP155 spec:
     // when computing the hash of a transaction for purposes of signing or recovering,
     // instead of hashing only the first six elements (ie. nonce, gasprice, startgas, to, value, data),
@@ -237,7 +237,7 @@ class Transaction {
    * @return {Boolean}
    */
   verifySignature () {
-    const msgHash = this.hash(false)
+    const msgHash = this.hash(true)
     // All transaction signatures whose s-value is greater than secp256k1n/2 are considered invalid.
     if (this._homestead && new BN(this.s).cmp(N_DIV_2) === 1) {
       return false
@@ -261,8 +261,9 @@ class Transaction {
    * @param {Buffer} privateKey
    */
   sign (privateKey, chainID) {
-    const msgHash = this.hash(false)
+    const msgHash = this.hash(true, chainID)
     const sig = ethUtil.ecsign(msgHash, privateKey)
+
     if (chainID > 0) {
       sig.v += chainID * 2 + 8
     }
