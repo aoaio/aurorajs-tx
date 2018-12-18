@@ -31,7 +31,7 @@ const txParams = {
     data: '',
     action: 0, // 0 for regular/asset transaction, 6 for call contract
   //   asset: AOAtoHex('AOA0000000000000000000000000000000000000000'), //asset id, use it when asset transaction
-    // subAddress: AOAtoHex('AOA2b31c44ccbb50b27b2b283970393f4a3da153a1417177ba750f0d7ea5e7045e37abfc6db')
+    subAddress: 'AOA2b31c44ccbb50b27b2b283970393f4a3da153a1417177ba750f0d7ea5e7045e37abfc6db'
   }
 let tx = new Transaction(txParams)
 

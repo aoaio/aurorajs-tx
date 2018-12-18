@@ -28,7 +28,7 @@ const txParams = {
   data: '0x7f7465737432000000000000000000000000000000000000000000000000000000600057',
   action: 0, // 0 for regular/asset transaction, 6 for call contract
   asset: AOAtoHex('AOA0000000000000000000000000000000000000000'), //asset id, use it when asset transaction
-  subAddress: AOAtoHex('AOA140e0b100bc3c5820a5d5ed3cf94d54491f51a2fb590033560f603659600033565733600')
+  subAddress: 'AOA140e0b100bc3c5820a5d5ed3cf94d54491f51a2fb590033560f603659600033565733600'
 
 const tx = new AuroraTx(txParams)
 tx.sign(privateKey, chainId)
